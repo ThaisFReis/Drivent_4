@@ -36,7 +36,7 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
     });
   } catch (error) {
     if (error.name === 'NotFoundError') {
-      return res.sendStatus(httpStatus.NOT_FOUND);
+      return res.sendStatus(404);
     }
     return res.sendStatus(httpStatus.FORBIDDEN);
   }
@@ -56,6 +56,9 @@ export async function updateBooking(req: AuthenticatedRequest, res: Response) {
   } catch (error) {
     if (error.name === 'NotFoundError') {
       return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    if (error.name === 'cannotFindRoom') {
+      return res.sendStatus(404);
     }
     return res.sendStatus(httpStatus.FORBIDDEN);
   }

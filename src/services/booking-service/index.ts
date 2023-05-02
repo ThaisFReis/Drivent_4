@@ -5,26 +5,37 @@ import {
   cannotBookingError,
   forbiddenError,
   unauthorizedError,
+  cannotFindRoom,
 } from '@/errors';
 import bookingRepository from '@/repositories/booking-repository';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 import ticketsRepository from '@/repositories/tickets-repository';
 import hotelRepository from '@/repositories/hotel-repository';
 
-async function createBooking(userId: number, roomId: number) {
-  const room = await hotelRepository.findRoomById(roomId);
-  if (room.capacity <= 0) throw forbiddenError;
-
+async function check(roomId: number, userId: number) {
+  //Enrollment
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
 
-  if (!enrollment) throw invalidDataError;
+  if (!enrollment) throw cannotBookingError;
 
-  const booking = await bookingRepository.getBookingsIfHasRoom(roomId);
-  if (booking.length > 0) throw conflictError;
-
+  //Ticket
   const ticket = await ticketsRepository.findTicketByEnrollmentId(enrollment.id);
+
   if (!ticket || ticket.status === 'RESERVED' || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel)
     throw cannotBookingError;
+
+  //Room
+  const room = await hotelRepository.findRoomById(roomId);
+
+  if (!room) throw notFoundError;
+
+  const bookings = await bookingRepository.findBookingByRoomId(roomId);
+
+  if (room.capacity <= bookings.length) throw cannotBookingError;
+}
+
+async function createBooking(userId: number, roomId: number) {
+  await check(roomId, userId);
 
   const newBooking = await bookingRepository.createBooking(roomId, userId);
 
@@ -39,24 +50,14 @@ async function getBookingByUserId(userId: number) {
   return booking;
 }
 
-async function updateBooking(bookingId: number, roomId: number, userId: number) {
-  if (!userId) throw unauthorizedError;
-  if (!roomId) throw notFoundError;
+async function updateBooking(roomId: number, userId: number) {
+  await check(roomId, userId);
 
-  const room = await hotelRepository.findRoomById(roomId);
+  const booking = await bookingRepository.findBookingByUserId(userId);
 
-  if (!room) throw forbiddenError;
+  if (!booking || booking.id !== userId) throw cannotBookingError;
 
-  const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
-
-  if (!enrollment) throw forbiddenError;
-
-  if (!bookingId) throw notFoundError;
-
-  const booking = await bookingRepository.findBookingByRoomId(roomId);
-  if (booking) throw conflictError;
-
-  const updatedBooking = await bookingRepository.updateBooking(bookingId, roomId, userId);
+  const updatedBooking = await bookingRepository.updateBooking(booking.id, roomId, userId);
 
   return updatedBooking;
 }
