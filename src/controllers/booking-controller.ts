@@ -10,19 +10,16 @@ export async function createBooking(req: AuthenticatedRequest, res: Response) {
   try {
     const newBooking = await bookingService.createBooking(userId, roomId);
 
-    return res.status(httpStatus.CREATED).json(newBooking);
+    // return bookingId and status 200
+    return res.status(httpStatus.OK).send({
+      roomId: newBooking.roomId,
+    });
   } catch (error) {
     if (error.name === 'NotFoundError') {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    if (error.name === 'InvalidDataError') {
-      return res.sendStatus(httpStatus.BAD_REQUEST);
-    }
-    if (error.name === 'ConflictError') {
-      return res.sendStatus(httpStatus.CONFLICT);
-    }
-    if (error.name === 'CannotBookingError') {
-      return res.sendStatus(httpStatus.BAD_REQUEST);
+    if (error.name === 'ForbiddenError') {
+      return res.sendStatus(httpStatus.FORBIDDEN);
     }
   }
 }
@@ -33,28 +30,33 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
   try {
     const booking = await bookingService.getBookingByUserId(userId);
 
-    return res.status(httpStatus.OK).json(booking);
+    return res.status(httpStatus.OK).send({
+      id: booking.id,
+      Room: booking.roomId,
+    });
   } catch (error) {
     if (error.name === 'NotFoundError') {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
+    return res.sendStatus(httpStatus.FORBIDDEN);
   }
 }
 
 export async function updateBooking(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   const { roomId } = req.body;
+  const { bookingId } = req.params;
 
   try {
-    const updatedBooking = await bookingService.updateBooking(userId, roomId);
+    const updatedBooking = await bookingService.updateBooking(userId, roomId, Number(bookingId));
 
-    return res.status(httpStatus.OK).json(updatedBooking);
+    return res.status(httpStatus.OK).send({
+      roomId: updatedBooking.roomId,
+    });
   } catch (error) {
     if (error.name === 'NotFoundError') {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    if (error.name === 'ConflictError') {
-      return res.sendStatus(httpStatus.CONFLICT);
-    }
+    return res.sendStatus(httpStatus.FORBIDDEN);
   }
 }

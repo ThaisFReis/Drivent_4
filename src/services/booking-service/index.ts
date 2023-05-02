@@ -1,4 +1,3 @@
-import { Booking } from '@prisma/client';
 import {
   invalidDataError,
   conflictError,
@@ -7,17 +6,12 @@ import {
   forbiddenError,
   unauthorizedError,
 } from '@/errors';
-import { exclude } from '@/utils/prisma-utils';
 import bookingRepository from '@/repositories/booking-repository';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 import ticketsRepository from '@/repositories/tickets-repository';
 import hotelRepository from '@/repositories/hotel-repository';
 
 async function createBooking(userId: number, roomId: number) {
-  if (!userId) throw unauthorizedError;
-
-  if (!roomId) throw notFoundError;
-
   const room = await hotelRepository.findRoomById(roomId);
   if (room.capacity <= 0) throw forbiddenError;
 
