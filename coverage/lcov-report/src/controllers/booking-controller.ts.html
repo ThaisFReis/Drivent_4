@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.94% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/34</span>
+                <span class='fraction'>26/34</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -137,35 +137,35 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,23 +178,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,7 +233,7 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
   try {
     const booking = await bookingService.getBookingByUserId(userId);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return res.status(httpStatus.OK).send({</span>
+    return res.status(httpStatus.OK).send({
       id: booking.id,
       Room: booking.roomId,
     });
@@ -245,24 +245,24 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
   }
 }
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >updateBooking(</span>req: AuthenticatedRequest, res: Response) {
-  const { userId } = <span class="cstat-no" title="statement not covered" >req;</span>
-  const { roomId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+export async function updateBooking(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+  const { roomId } = req.body;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!roomId) <span class="cstat-no" title="statement not covered" >return res.sendStatus(httpStatus.BAD_REQUEST);</span></span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!roomId) <span class="cstat-no" title="statement not covered" >return res.sendStatus(httpStatus.BAD_REQUEST);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const updatedBooking = <span class="cstat-no" title="statement not covered" >await bookingService.updateBooking(userId, roomId);</span>
+  try {
+    const updatedBooking = await bookingService.updateBooking(userId, roomId);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return res.status(httpStatus.OK).send({</span>
       roomId: updatedBooking.roomId,
     });
   } catch (error) {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (error.name === 'CannotBookingError') {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (error.name === 'CannotBookingError') {
 <span class="cstat-no" title="statement not covered" >      return res.sendStatus(httpStatus.FORBIDDEN);</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (error.name === 'NotFoundError') {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (error.name === 'NotFoundError') {
 <span class="cstat-no" title="statement not covered" >      return res.sendStatus(httpStatus.NOT_FOUND);</span>
     }
   }
@@ -274,7 +274,7 @@ export async function <span class="fstat-no" title="function not covered" >updat
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue May 02 2023 17:39:30 GMT-0300 (Horário Padrão de Brasília)
+                at Tue May 02 2023 17:53:02 GMT-0300 (Horário Padrão de Brasília)
             </div>
         <script src="../../prettify.js"></script>
         <script>
