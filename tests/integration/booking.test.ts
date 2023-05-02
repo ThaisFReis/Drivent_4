@@ -148,9 +148,9 @@ describe('POST /booking', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      await createBooking(room.id, ticket.id);
-      await createBooking(room.id, ticket.id);
-      await createBooking(room.id, ticket.id);
+      await createBooking({ roomId: room.id, userId: user.id });
+      await createBooking({ roomId: room.id, userId: user.id });
+      await createBooking({ roomId: room.id, userId: user.id });
 
       const response = await server.post('/booking').set('Authorization', `Bearer ${token}`).send({
         roomId: room.id,
@@ -275,9 +275,9 @@ describe('GET /booking', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      await createBooking(room.id, ticket.id);
-      await createBooking(room.id, ticket.id);
-      await createBooking(room.id, ticket.id);
+      await createBooking({ roomId: room.id, userId: user.id });
+      await createBooking({ roomId: room.id, userId: user.id });
+      await createBooking({ roomId: room.id, userId: user.id });
 
       const response = await server.get('/booking').set('Authorization', `Bearer ${token}`).send({
         roomId: room.id,
@@ -327,7 +327,7 @@ describe('PUT /booking/bookingId', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking(room.id, ticket.id);
+      const booking = await createBooking({ roomId: room.id, userId: user.id });
 
       const changeRoom = await createRoomWithHotelId(hotel.id);
 
@@ -352,7 +352,7 @@ describe('PUT /booking/bookingId', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking(room.id, ticket.id);
+      const booking = await createBooking({ roomId: room.id, userId: user.id });
 
       const changeRoom = await createRoomWithHotelId(hotel.id);
 
@@ -376,7 +376,7 @@ describe('PUT /booking/bookingId', () => {
       const hotel = await createHotel();
       const room = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking(room.id, ticket.id);
+      const booking = await createBooking({ roomId: room.id, userId: user.id });
 
       const response = await server
         .put('/booking/${booking.id}')
@@ -402,10 +402,10 @@ describe('PUT /booking/bookingId', () => {
       const room = await createRoomWithHotelId(hotel.id);
       const changeRoom = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking(room.id, ticket.id);
-      await createBooking(changeRoom.id, ticket.id);
-      await createBooking(changeRoom.id, ticket.id);
-      await createBooking(changeRoom.id, ticket.id);
+      const booking = await createBooking({ roomId: room.id, userId: user.id });
+      await createBooking({ roomId: changeRoom.id, userId: user.id });
+      await createBooking({ roomId: changeRoom.id, userId: user.id });
+      await createBooking({ roomId: changeRoom.id, userId: user.id });
 
       const response = await server.put('/booking/${booking.id}').set('Authorization', `Bearer ${token}`).send({
         roomId: changeRoom.id,
@@ -428,7 +428,7 @@ describe('PUT /booking/bookingId', () => {
       const room = await createRoomWithHotelId(hotel.id);
       const changeRoom = await createRoomWithHotelId(hotel.id);
 
-      const booking = await createBooking(room.id, ticket.id);
+      const booking = await createBooking({ roomId: room.id, userId: user.id });
 
       const response = await server.put('/booking').set('Authorization', `Bearer ${token}`).send({
         bookingId: booking.id,
