@@ -1,12 +1,4 @@
-import {
-  invalidDataError,
-  conflictError,
-  notFoundError,
-  cannotBookingError,
-  forbiddenError,
-  unauthorizedError,
-  cannotFindRoom,
-} from '@/errors';
+import { notFoundError, cannotBookingError } from '@/errors';
 import bookingRepository from '@/repositories/booking-repository';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 import ticketsRepository from '@/repositories/tickets-repository';
